@@ -1,9 +1,9 @@
-import { Create, List, Datagrid, TextField, DateField, DateInput, Edit, SimpleForm, TextInput, EditButton, DateField, DateInput} from 'react-admin';
+import { Create, List, Datagrid, TextField, Edit, SimpleForm, TextInput, EditButton, DateField, DateTimeInput, NumberField, NumberInput} from 'react-admin';
 
 export const EventList = props => (
   <List {...props}>
     <Datagrid rowClick='edit'>
-      <TextField source='id' />
+      <NumberField source='id' />
       <TextField source='header' />
       <DateField source='date' />
       <TextField source='place' />
@@ -15,9 +15,9 @@ export const EventList = props => (
 export const EventEdit = props => (
     <Edit {...props}>
       <SimpleForm>
-        <TextInput disabled source='id' />
+        <NumberInput disabled source='id' />
         <TextInput source='header' />
-        <DateInput source='date' />
+        <DateTimeInput source='date' />
         <TextInput source='place'/>
       </SimpleForm>
     </Edit>
@@ -26,8 +26,9 @@ export const EventEdit = props => (
   export const EventCreate = props => (
     <Create {...props}>
       <SimpleForm>
+        <NumberInput source='id' />
         <TextInput source='header' />
-        <DateInput source='date' />
+        <DateTimeInput source='date' />
         <TextInput source='place'/>
       </SimpleForm>
     </Create>

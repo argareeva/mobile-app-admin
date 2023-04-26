@@ -1,10 +1,11 @@
-import {Edit, TextInput, ReferenceInput, SimpleForm, Datagrid, EditButton, List, ReferenceField, TextField, SelectInput, Create, Filter} from 'react-admin';
+import {Edit, Create, SimpleForm, Datagrid, EditButton, List, ReferenceInput, ReferenceField,
+     TextInput, TextField, SelectInput, NumberField, NumberInput,  RichTextField, Filter} from 'react-admin';
 
 export const WorkoutList = props => (
     <List {...props}>
         <Datagrid>
-            <TextField source='id' />
-            <TextField source='schedule' />
+            <NumberField source='id' />
+            <RichTextField source='schedule' />
             <TextField source='group' />
             <ReferenceField source='coach_id' reference='Coach'>
                 <TextField source='fullName' />
@@ -17,8 +18,8 @@ export const WorkoutList = props => (
 export const WorkoutEdit = () => (
     <Edit>
         <SimpleForm>
-            <TextInput disabled source='id' />
-            <TextInput source='schedule' />
+            <NumberInput disabled source='id' />
+            <ReferenceInput source='schedule' />
             <TextInput source='group' />
             <ReferenceInput source='coach_id' reference='Coach'>
                 <SelectInput optionText='fullName' />
@@ -30,6 +31,7 @@ export const WorkoutEdit = () => (
 export const WorkoutCreate = props => (
     <Create {...props}>
         <SimpleForm>
+            <NumberInput source='id' />
             <TextInput source='schedule' />
             <TextInput source='group' />
             <ReferenceInput source='coach_id' reference='Coach'>

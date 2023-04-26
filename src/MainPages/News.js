@@ -1,12 +1,13 @@
-import { Create, List, Datagrid, TextField, DateField, DateInput, Edit, SimpleForm, TextInput, EditButton, DateField, DateInput} from 'react-admin';
+import { Create, List, Datagrid, Edit, EditButton, SimpleForm, TextField, TextInput,
+   RichTextField, DateField, DateTimeInput, NumberField, NumberInput} from 'react-admin';
 
 export const NewsList = props => (
   <List {...props}>
     <Datagrid rowClick='edit'>
-      <TextField source='id' />
+      <NumberField source='id' />
       <TextField source='header' />
       <DateField source='date' />
-      <TextField source='content' />
+      <RichTextField source='content' />
       <EditButton />
     </Datagrid>
   </List>
@@ -15,9 +16,9 @@ export const NewsList = props => (
 export const NewsEdit = props => (
     <Edit {...props}>
       <SimpleForm>
-        <TextInput disabled source='id' />
+        <NumberInput disabled source='id' />
         <TextInput source='header' />
-        <DateInput source='date' />
+        <DateTimeInput source='date' />
         <TextInput source='content'/>
       </SimpleForm>
     </Edit>
@@ -26,8 +27,9 @@ export const NewsEdit = props => (
   export const NewsCreate = props => (
     <Create {...props}>
       <SimpleForm>
+        <NumberInput source='id' />
         <TextInput source='header' />
-        <DateInput source='date' />
+        <DateTimeInput source='date' />
         <TextInput source='content'/>
       </SimpleForm>
     </Create>

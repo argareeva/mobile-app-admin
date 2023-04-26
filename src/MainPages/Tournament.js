@@ -1,12 +1,13 @@
-import { Create, List, Datagrid, TextField, DateField, DateInput, Edit, SimpleForm, TextInput, EditButton, DateField, DateInput} from 'react-admin';
+import { Create, List, Datagrid, Edit, EditButton, SimpleForm, TextField, TextInput,
+     RichTextField, DateField, DateTimeInput, NumberField, NumberInput, required} from 'react-admin';
 
 export const TournamentList = props => (
     <List {...props}>
         <Datagrid rowClick='edit'>
-            <TextField source='id' />
+            <NumberField source='id' />
             <TextField source='name' />
             <DateField source='date' />
-            <TextField source='description' />
+            <RichTextField source='description' />
             <TextField source='place' />
             <EditButton />
         </Datagrid>
@@ -16,9 +17,9 @@ export const TournamentList = props => (
 export const TournamentEdit = props => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput disabled source='id' />
+            <NumberInput disabled source='id' />
             <TextInput source='name' />
-            <DateInput source='date' />
+            <DateTimeInput source='date' />
             <TextInput source='description'/>
             <TextInput source='place'/>
         </SimpleForm>
@@ -28,8 +29,9 @@ export const TournamentEdit = props => (
   export const TournamentCreate = props => (
     <Create {...props}>
         <SimpleForm>
+            <NumberInput source='id' validate={required()}/>
             <TextInput source='name' />
-            <DateInput source='date' />
+            <DateTimeInput source='date' />
             <TextInput source='description'/>
             <TextInput source='place'/>
         </SimpleForm>
