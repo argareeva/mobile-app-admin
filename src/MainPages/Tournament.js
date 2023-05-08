@@ -1,39 +1,97 @@
-import { Create, List, Datagrid, Edit, EditButton, SimpleForm, TextField, TextInput,
-     RichTextField, DateField, DateTimeInput, NumberField, NumberInput, required} from 'react-admin';
+import React from 'react';
+
+import { Create, List, Datagrid, Edit, EditButton, SimpleForm, TextField, TextInput, ImageField, ImageInput,
+    RichTextField, DateField, DateTimeInput, NumberField, NumberInput, useCreate, useRecordContext} from 'react-admin';
 
 export const TournamentList = props => (
-    <List {...props}>
-        <Datagrid rowClick='edit'>
-            <NumberField source='id' />
-            <TextField source='name' />
-            <DateField source='date' />
-            <RichTextField source='description' />
-            <TextField source='place' />
-            <EditButton />
-        </Datagrid>
-    </List>
+   <List {...props}>
+       <Datagrid rowClick='edit'>
+           <NumberField source='id' />
+           <TextField source='name' />
+           <DateField source='date' />
+           <RichTextField source='description' />
+           <TextField source='place' />
+           <ImageField source="picture" title="Picture"/>
+           <EditButton />
+       </Datagrid>
+   </List>
 );
 
-export const TournamentEdit = props => (
-    <Edit {...props}>
-        <SimpleForm>
-            <NumberInput disabled source='id' />
-            <TextInput source='name' />
-            <DateTimeInput source='date' />
-            <TextInput source='description'/>
-            <TextInput source='place'/>
-        </SimpleForm>
-    </Edit>
-  );
+const PreviewImage = ({ source }) => {
+    let record = useRecordContext();
+    if (record.undefined) {
+      record = {
+        [source]: record.undefined,
+      };
+    }
+    return <ImageField source={source} record={record} title="Picture" />;
+  };
 
-  export const TournamentCreate = props => (
-    <Create {...props}>
-        <SimpleForm>
-            <NumberInput source='id' validate={required()}/>
-            <TextInput source='name' />
-            <DateTimeInput source='date' />
-            <TextInput source='description'/>
-            <TextInput source='place'/>
-        </SimpleForm>
-    </Create>
-  );
+export const TournamentEdit = props => (
+   <Edit {...props}>
+       <SimpleForm>
+           <NumberInput disabled source='id' />
+           <TextInput source='name' />
+           <DateTimeInput source='date' />
+           <TextInput source='description'/>
+           <TextInput source='place'/>
+           <ImageInput source='picture'>
+                <PreviewImage source='src' />
+            </ImageInput>
+       </SimpleForm>
+   </Edit>
+ );
+
+ export const TournamentCreate = props => {
+    const [image, setImage] = React.useState()
+    const [imageBlob, setImageBlob] = React.useState('')
+    const [create] = useCreate();
+
+    function getBase64(file) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      let res
+      reader.onload = function () {
+        res = reader.result
+        setImageBlob(res)
+        return reader.result
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+      return res
+   }
+
+    const postSave = (data) => {
+      data.picture = imageBlob
+      console.log('data', data)
+      create('user', { data });
+    };
+
+    React.useEffect(() => {
+      if (image) {
+        setImageBlob(getBase64(image))
+      }
+    }, [image])
+
+    return (
+      (
+        <>
+        <Create>
+          <SimpleForm onSubmit={postSave}>
+          <TextInput source='name' />
+           <DateTimeInput source='date' />
+           <TextInput source='description'/>
+           <TextInput source='place'/>
+            <ImageInput source="picture" label="Picture" onChange={(file) => setImage(file)} {...props}>
+              <ImageField  source="url" title="title"/>
+            </ImageInput>
+            <div>
+              <img width='60%' src={imageBlob}/>
+             </div>
+          </SimpleForm>
+        </Create>
+        </>
+      )
+    )
+  };
