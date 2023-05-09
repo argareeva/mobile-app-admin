@@ -1,6 +1,6 @@
 import {
   Create, List, Datagrid, Edit, EditButton, SimpleForm, TextField, TextInput, Filter,
-  RichTextField, DateField, DateTimeInput, NumberField, NumberInput
+  RichTextField, DateField, DateTimeInput, NumberField, NumberInput, ReferenceInput, SelectInput,
 } from 'react-admin';
 
 const SeminarFilter = (props) => (

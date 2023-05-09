@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
   Create, List, Datagrid, TextField, Edit, SimpleForm, TextInput, EditButton, DateField, DateTimeInput,
-  NumberField, NumberInput, ImageField, ImageInput, useCreate, useRecordContext, Filter
+  NumberField, NumberInput, ImageField, ImageInput, useCreate, useRecordContext, Filter, ReferenceInput, SelectInput,
 } from 'react-admin';
 
 const EventFilter = (props) => (

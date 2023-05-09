@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  Create, List, Datagrid, Edit, EditButton, SimpleForm, BooleanField, BooleanInput, ImageField, ImageInput, Filter,
+  Create, List, Datagrid, Edit, EditButton, SimpleForm, BooleanField, BooleanInput, ImageField, ImageInput, Filter, ReferenceInput,
   EmailField, TextField, TextInput, PasswordInput, NumberField, NumberInput, email, SelectInput, useCreate, useRecordContext
 } from 'react-admin';
 
