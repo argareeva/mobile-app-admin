@@ -1,19 +1,21 @@
 import React from 'react';
 
-import { Create, List, Datagrid, Edit, EditButton, SimpleForm, TextField, TextInput, ImageField, ImageInput,
-  RichTextField, DateField, DateTimeInput, NumberField, NumberInput, useCreate, useRecordContext} from 'react-admin';
+import {
+  Create, List, Datagrid, Edit, EditButton, SimpleForm, TextField, TextInput, ImageField, ImageInput,
+  RichTextField, DateField, DateTimeInput, NumberField, NumberInput, useCreate, useRecordContext
+} from 'react-admin';
 
 export const NewsList = props => (
- <List {...props}>
-   <Datagrid rowClick='edit'>
-     <NumberField source='id' />
-     <TextField source='header' />
-     <DateField source='date' />
-     <RichTextField source='content' />
-     <ImageField source="picture" title="Picture"/>
-     <EditButton />
-   </Datagrid>
- </List>
+  <List {...props}>
+    <Datagrid rowClick='edit'>
+      <NumberField source='id' />
+      <TextField source='header' />
+      <DateField source='date' />
+      <RichTextField source='content' />
+      <ImageField source="picture" title="Picture" />
+      <EditButton />
+    </Datagrid>
+  </List>
 );
 
 const PreviewImage = ({ source }) => {
@@ -27,20 +29,20 @@ const PreviewImage = ({ source }) => {
 };
 
 export const NewsEdit = props => (
-   <Edit {...props}>
-     <SimpleForm>
-       <NumberInput disabled source='id' />
-       <TextInput source='header' />
-       <DateTimeInput source='date' />
-       <TextInput source='content'/>
-       <ImageInput source='picture'>
-          <PreviewImage source='src' />
-        </ImageInput>
-     </SimpleForm>
-   </Edit>
- );
+  <Edit {...props}>
+    <SimpleForm>
+      <NumberInput disabled source='id' />
+      <TextInput source='header' />
+      <DateTimeInput source='date' />
+      <TextInput source='content' />
+      <ImageInput source='picture'>
+        <PreviewImage source='src' />
+      </ImageInput>
+    </SimpleForm>
+  </Edit>
+);
 
- export const NewsCreate = props => {
+export const NewsCreate = props => {
   const [image, setImage] = React.useState()
   const [imageBlob, setImageBlob] = React.useState('')
   const [create] = useCreate();
@@ -58,7 +60,7 @@ export const NewsEdit = props => (
       console.log('Error: ', error);
     };
     return res
- }
+  }
 
   const postSave = (data) => {
     data.picture = imageBlob
@@ -75,19 +77,19 @@ export const NewsEdit = props => (
   return (
     (
       <>
-      <Create>
-        <SimpleForm onSubmit={postSave}>
-        <TextInput source='header'/>
-        <DateTimeInput source='date'/>
-        <TextInput source='content'/>
-          <ImageInput source="picture" label="Related pictures" onChange={(file) => setImage(file)} {...props}>
-            <ImageField  source="url" title="title"/>
-          </ImageInput>
-          <div>
-            <img width='60%' src={imageBlob}/>
-           </div>
-        </SimpleForm>
-      </Create>
+        <Create>
+          <SimpleForm onSubmit={postSave}>
+            <TextInput source='header' />
+            <DateTimeInput source='date' />
+            <TextInput source='content' />
+            <ImageInput source="picture" label="Related pictures" onChange={(file) => setImage(file)} {...props}>
+              <ImageField source="url" title="title" />
+            </ImageInput>
+            <div>
+              <img width='60%' src={imageBlob} />
+            </div>
+          </SimpleForm>
+        </Create>
       </>
     )
   )
