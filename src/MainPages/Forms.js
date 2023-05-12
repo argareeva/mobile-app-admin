@@ -1,7 +1,34 @@
 import { List, Datagrid, TextField, DateField, RichTextField, NumberField, EmailField } from 'react-admin';
 
+const FeedbackFilter = (props) => (
+    <Filter {...props}>
+      <TextInput label='Search' source='q' alwaysOn />
+      <ReferenceInput label='Feedback' source='id' reference='Feedback' allowEmpty>
+        <SelectInput optionText='id' />
+      </ReferenceInput>
+    </Filter>
+  );
+
+  const TournamentFilter = (props) => (
+    <Filter {...props}>
+      <TextInput label='Search' source='q' alwaysOn />
+      <ReferenceInput label='Tournament' source='id' reference='TournamentForm' allowEmpty>
+        <SelectInput optionText='id' />
+      </ReferenceInput>
+    </Filter>
+  );
+
+  const TrialFilter = (props) => (
+    <Filter {...props}>
+      <TextInput label='Search' source='q' alwaysOn />
+      <ReferenceInput label='Trial' source='id' reference='TrialForm' allowEmpty>
+        <SelectInput optionText='id' />
+      </ReferenceInput>
+    </Filter>
+  );
+
 export const Feedback = props => (
-    <List {...props}>
+    <List filter={<FeedbackFilter />}{...props}>
         <Datagrid rowClick='edit'>
             <NumberField source='id' />
             <TextField source='fullName' />
@@ -13,7 +40,7 @@ export const Feedback = props => (
 );
 
 export const TournamentForm = props => (
-    <List {...props}>
+    <List filter={<TournamentFilter />}{...props}>
         <Datagrid rowClick='edit'>
             <NumberField source='id' />
             <TextField source='fullName' />
@@ -26,7 +53,7 @@ export const TournamentForm = props => (
 );
 
 export const TrialForm = props => (
-    <List {...props}>
+    <List filter={<TrialFilter />}{...props}>
         <Datagrid rowClick='edit'>
             <NumberField source='id' />
             <TextField source='fullName' />

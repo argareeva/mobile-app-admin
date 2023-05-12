@@ -5,8 +5,17 @@ import {
   RichTextField, DateField, DateTimeInput, NumberField, NumberInput, useCreate, useRecordContext
 } from 'react-admin';
 
+const NewsFilter = (props) => (
+  <Filter {...props}>
+    <TextInput label='Search' source='q' alwaysOn />
+    <ReferenceInput label='News' source='id' reference='News' allowEmpty>
+      <SelectInput optionText='id' />
+    </ReferenceInput>
+  </Filter>
+);
+
 export const NewsList = props => (
-  <List {...props}>
+  <List filter={<NewsFilter />} {...props}>
     <Datagrid rowClick='edit'>
       <NumberField source='id' />
       <TextField source='header' />

@@ -3,8 +3,17 @@ import {
     TextInput, TextField, SelectInput, NumberField, NumberInput, RichTextField
 } from 'react-admin';
 
+const WorkoutFilter = (props) => (
+    <Filter {...props}>
+      <TextInput label='Search' source='q' alwaysOn />
+      <ReferenceInput label='Workout' source='id' reference='Workout' allowEmpty>
+        <SelectInput optionText='id' />
+      </ReferenceInput>
+    </Filter>
+  );
+
 export const WorkoutList = props => (
-    <List {...props}>
+    <List filter={<WorkoutFilter />} {...props}>
         <Datagrid>
             <NumberField source='id' />
             <RichTextField source='schedule' />
